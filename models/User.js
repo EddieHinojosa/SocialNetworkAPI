@@ -17,7 +17,7 @@ const UserSchema = new Schema(
             match: [/.+@.+\..+/, 'Please enter a valid email address']
         },
         thoughts: [{
-            type: mogoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'thoughts'
         }],
         friends: [{
@@ -45,4 +45,5 @@ UserSchema.virtual('thoughtCount').get(function() {
 
 // create the User model using the UserSchema
 const User = mongoose.model('User', UserSchema);
+
 module.exports = User;
