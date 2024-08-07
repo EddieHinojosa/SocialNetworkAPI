@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const express = require('express');
+// const express = require('express');
 const User = require('../../models/User');
 const Thought = require('../../models/Thought');
 
@@ -22,6 +22,16 @@ router.post('/:id', async (req, res)=> {
 })
 
 
+// CRUD Read/get
+
+router.get('/', async (req, res) => {
+    try {
+        const thoughts = await Thought.find({});
+        res.status(200).json({message: 'thoughts retriieved successfully', data: thoughts});
+    } catch (err) {
+        res.status(500).json({message: 'error gathering thoughts', error: err.message});
+    }
+});
 
 
 
