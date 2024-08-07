@@ -19,26 +19,74 @@ router.post('/:id', async (req, res)=> {
     } catch (err) {
         res.status(400).json({message: 'Unable to add thought', error: err});
     }
-})
+});
 
 
-// CRUD Read/get
+// CRUD Read/get (all)
 
 router.get('/', async (req, res) => {
     try {
         const thoughts = await Thought.find({});
         res.status(200).json({message: 'thoughts retriieved successfully', data: thoughts});
     } catch (err) {
-        res.status(500).json({message: 'error gathering thoughts', error: err.message});
+        res.status(500).json({message: 'unable to gathering your thoughts', error: err.message});
     }
 });
 
 
+// CRUD Read/get (by id)
+
+router.ger('/:id', (req, res)=> {
+    Thought.findOne({_id: req.params.id})
+    .then(thought => {
+        if (!thought) {
+            res.status(404).json({message: 'No thought found with this id'});
+            return;
+        }
+        res.json(thought);
+    })
+    .catch(err => {
+        res.status(400).json({message: 'unable to locating that thought', error: err.message});
+    });
+});
 
 
+// CRUD Update/put
+
+router.put('/:id', (req, res) => {
+    Thought.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: req.body },
+        { runValidators: true, new: true }
+    )
+    .then((data) => {
+        if (!data) {
+            res.status(404).json({message: 'No thought found with this id'});
+            return;
+        }
+        res.json({message: 'thought updated' , data: data});
+    })
+    .catch((err) => {
+        res.status(400).json({message: 'unable to update thought', error: err.message});
+    });
+});
 
 
+// CRUD Delete/delete
 
+router.delete('/:id', (req, res) => {
+    Thought.findOneAndDelete({ _id: req.params.id })
+    .then((data) => {
+        if (!data) {
+            res.status(404).json({message: 'No thought found with this id'});
+            return;
+        }
+        res.json({message: 'thought deleted', data: data});
+    })
+    .catch((err) => {
+        res.status(400).json({message: 'unable to delete thought', error: err.message});
+    });
+});
 
 
 
