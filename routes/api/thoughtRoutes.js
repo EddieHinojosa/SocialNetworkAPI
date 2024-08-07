@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 
 // CRUD Read/get (by id)
 
-router.ger('/:id', (req, res)=> {
+router.get('/:id', (req, res)=> {
     Thought.findOne({_id: req.params.id})
     .then(thought => {
         if (!thought) {
