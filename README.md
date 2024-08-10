@@ -40,6 +40,10 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 
 
+https://github.com/user-attachments/assets/45cf592d-81fd-4503-987f-7a2720159fd0
+
+
+
 
 
 
