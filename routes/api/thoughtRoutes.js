@@ -7,15 +7,20 @@ const Thought = require('../../models/Thought');
 //------------thoughts Routes----------------
 // CRUD Create/post
 
-router.post('/:id', async (req, res)=> {
+router.post('/:id', async (req, res) => {
+    const addingThrought = {
+        ...req.body,
+        userId: req.params.id,
+    };
+    
     try {
-        const thought = await Thought.create(req.body);
+        const thoughts = await Thought.create(addingThrought);
         await User.findOneAndUpdate(
             { _id: req.params.id },
-            { $push: { thoughts: thought._id } },
+            { $push: { thoughts: thoughts._id } },
             { new: true }
         );
-        res.json({message: 'Thought added to user', data: thought});
+        res.json({message: 'Thought added to user', data: thoughts });
     } catch (err) {
         res.status(400).json({message: 'Unable to add thought', error: err});
     }

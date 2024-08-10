@@ -17,8 +17,22 @@ router.post('/', (req, res) => {
 });
 
 
+//CRUD READ/get (all)
+router.get('/', (req, res) => {
+    User.find({})
+        .exec()
+        .then(dbUserData => {
+            res.json({ message: 'Users retrieved successfully', data: dbUserData });
+        })
+        .catch(err => {
+            res.status(400).json({ message: 'Error retrieving users', error: err });
+        });
+});
 
-// CRUD Read/get
+
+
+
+// CRUD Read/get by ID (1)
 router.get('/:id', (req, res) => {
     User.findOne({ _id: req.params.id })
         .exec()
