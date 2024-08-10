@@ -19,6 +19,7 @@
 
 ## How It Works:
 
+<p>I have my MongoDB key located in my dotenv file</p>
 
 ```js
 run `npm i && npm start` in your terminal
