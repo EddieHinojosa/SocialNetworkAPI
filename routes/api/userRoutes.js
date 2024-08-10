@@ -82,7 +82,7 @@ router.delete('/:id', (req, res) => {
 
 //------------friends Routes----------------
 // CRUD update/put
-router.put("/:userId/friends/:friendId", (req, res) => {
+router.put("/:userId/friends/:friendId", (req, res) => { // path based on the database schema
     User.findByIdAndUpdate();
     
     //TODO:
